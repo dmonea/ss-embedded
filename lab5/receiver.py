@@ -2,12 +2,22 @@ import paho.mqtt.client as mqtt
 import cv2
 import numpy as np
 import threading
- 
+import os
+import json
+
 # Configuration
-BROKER = "10.41.54.87"  # TODO: Modificați cu IP-ul brokerului vostru
-PORT = 8883
-TOPIC_IMAGE = "ssproject/images"
-TOPIC_COMMAND = "ssproject/commands"
+SECRETS_FILE=os.getenv("SECRETS_FILE", None)
+if SECRETS_FILE is None:
+    print("NO SECRETS FILE IN ENV")
+    exit(-1)
+
+secrets = {}
+with open(SECRETS_FILE, "r") as in_file:
+    secrets = json.load(in_file)
+BROKER=secrets["MQTT_BROKER"]
+PORT = secrets["MQTT_PORT"]
+TOPIC_IMAGE = secrets["TOPIC_IMAGE"]
+TOPIC_COMMAND = secrets["TOPIC_COMMAND"]
 
 # Global flags
 running = True
