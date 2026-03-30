@@ -1,2 +1,3 @@
-# ss-embedded
-Systems Security - Lab 3
+# Systems Security Labs
+
+This repo contains the completed lab tasks
